@@ -1,5 +1,9 @@
 # React + Vite
 
+## Deployment
+
+[Open the deployed crowdfunding app](https://crowdfund-frontend-puce.vercel.app/)
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
