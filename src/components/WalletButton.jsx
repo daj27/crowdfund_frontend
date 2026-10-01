@@ -2,6 +2,7 @@ export default function WalletButton({
   account,
   chainId,
   onConnect,
+  onDisconnect,
 }) {
   if (account) {
     return (
@@ -20,6 +21,14 @@ export default function WalletButton({
             Switch to Sepolia
           </p>
         )}
+
+        <button
+          className="disconnect-button"
+          onClick={onDisconnect}
+          type="button"
+        >
+          Disconnect
+        </button>
       </div>
     );
   }

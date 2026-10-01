@@ -7,6 +7,13 @@ export function useWallet() {
   const [account, setAccount] = useState("");
   const [chainId, setChainId] = useState(null);
 
+  function disconnect() {
+    setProvider(null);
+    setSigner(null);
+    setAccount("");
+    setChainId(null);
+  }
+
   async function connect() {
     if (!window.ethereum) {
       throw new Error("MetaMask is not installed");
@@ -82,5 +89,6 @@ export function useWallet() {
     account,
     chainId,
     connect,
+    disconnect,
   };
 }
