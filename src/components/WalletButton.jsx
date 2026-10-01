@@ -3,6 +3,7 @@ export default function WalletButton({
   chainId,
   onConnect,
   onDisconnect,
+  isConnecting,
 }) {
   if (account) {
     return (
@@ -34,8 +35,8 @@ export default function WalletButton({
   }
 
   return (
-    <button onClick={onConnect}>
-      Connect Wallet
+    <button onClick={onConnect} disabled={isConnecting} type="button">
+      {isConnecting ? "Connecting..." : "Connect Wallet"}
     </button>
   );
 }

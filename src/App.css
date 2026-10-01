@@ -6,6 +6,7 @@
 .topbar {
   min-height: 84px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--line);
@@ -73,6 +74,37 @@
   color: var(--muted);
   font-family: var(--mono);
   font-size: 10px;
+}
+
+.wallet-error {
+  flex-basis: 100%;
+  margin: 0 0 12px;
+  color: var(--coral);
+  font-size: 12px;
+  text-align: right;
+}
+
+.wallet-area > button {
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--surface);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.wallet-area > button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.wallet-area > button:focus-visible {
+  outline: 3px solid rgba(49, 123, 91, 0.28);
+  outline-offset: 2px;
 }
 
 .wallet-area .disconnect-button {

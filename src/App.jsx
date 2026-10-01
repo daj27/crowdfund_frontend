@@ -6,8 +6,11 @@ import Contribute from "./components/Contribute";
 import CampaignActions from "./components/CampaignActions";
 
 import { useWallet } from "./hooks/useWallet";
+import { useState } from "react";
 
 function App() {
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [connectError, setConnectError] = useState("");
   const {
     provider,
     signer,
@@ -16,6 +19,30 @@ function App() {
     connect,
     disconnect,
   } = useWallet();
+
+  async function handleConnect() {
+    setConnectError("");
+    setIsConnecting(true);
+
+    try {
+      await connect();
+    } catch (error) {
+      if (error?.code === 4001) {
+        setConnectError("Wallet connection was rejected.");
+      } else if (error?.code === -32002) {
+        setConnectError("A wallet connection request is already pending.");
+      } else {
+        setConnectError(
+          error?.shortMessage ||
+            error?.info?.error?.message ||
+            error?.message ||
+            "Unable to connect wallet."
+        );
+      }
+    } finally {
+      setIsConnecting(false);
+    }
+  }
 
   return (
     <main className="app-shell">
@@ -29,10 +56,16 @@ function App() {
           <WalletButton
             account={account}
             chainId={chainId}
-            onConnect={connect}
+            onConnect={handleConnect}
             onDisconnect={disconnect}
+            isConnecting={isConnecting}
           />
         </div>
+        {connectError && (
+          <p className="wallet-error" role="alert">
+            {connectError}
+          </p>
+        )}
       </header>
 
       <section className="intro" id="top">
